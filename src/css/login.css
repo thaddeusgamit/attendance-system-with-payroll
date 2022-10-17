@@ -1,0 +1,43 @@
+.address{
+    font-size: 15px;
+}
+.form-container{
+    min-height: 85vh;
+    padding: 5em 0 10em 0;
+}
+.login-form{
+    border: 1px solid #ccc;
+    border-radius: 0 0 12px 12px;
+}
+.header-text{
+    background: red;
+    color:white;
+    padding: 15px 0;
+}
+.input-boxes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 5em;
+}
+.input-boxes input[type=text], input[type=password]{
+    margin: 12px ;
+    padding: 1px 8px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 20px;
+    font-family: var(--poppins);
+}
+.input-boxes input[type=submit]{
+    padding: 2px 20px;
+    background: #131313;
+    margin: 12px 0 0 0;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 20px;
+}
+.input-boxes input[type=submit]:hover{
+    background: #1b1d1c;
+}
