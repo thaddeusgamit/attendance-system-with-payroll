@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../connection.php');
 ?>
 
@@ -44,33 +45,29 @@ if(isset($_POST['login'])){
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+$default_password = "admin123";
 
 $query="SELECT username, password FROM admin WHERE username = '$username'";
 $result = mysqli_query($conn,$query);
 if (mysqli_num_rows($result)>0){
     while($row=mysqli_fetch_assoc($result)){
-         $hashed_password = $row['password'];
 
-          $admin_pass = password_verify($password,$hashed_password);
-      print_r($admin_pass);
-      
-      
-      
-        // if(password_verify($password,$row['password'])){ 
-        //     header("location: chngpass.php");
-        //      die();
-        // }
+         
+        if(password_verify($default_password,$row['password'])){ 
+            header("location: chngpass.php");
+             die();
+        }
 
 
-        // if (password_verify($password, $row['password'])){ 
-        //     $_SESSION['username'] = $username;
-        //     header("location: dashboard.php");
-        //      die();
+        if (password_verify($password, $row['password'])){ 
+             $_SESSION['username'] = $username;
+            header("location: dashboard.php");
+             die();
 
-        // } 
-        // else{
-        //     echo '<script>alert("Incorrect credentials")</script>' ; 
-        // }
+        } 
+        else{
+            echo '<script>alert("Incorrect credentials")</script>' ; 
+        }
 
 
 }

@@ -1,3 +1,10 @@
+<?php
+session_start();
+include('../session.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +14,8 @@
     <title>Welcome</title>
 </head>
 <body>
-    
+    <a href ="register.php">Register</a>
+    <a href ="logout.php">Logout</a>
+
 </body>
 </html>
