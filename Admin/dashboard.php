@@ -58,7 +58,7 @@ include('../session.php');
           $encryption = openssl_encrypt($eid, $ciphering,
                       $encryption_key, $options, $encryption_iv);
           //   $encrypted_data = (($lrn*12345678911*56789)/987654);
-            $edit_link = "edit.php?eid=" . $encryption;
+            $edit_link = "edit-employee.php?eid=" . $encryption;
             $delete_link = "delete.php?eid=" . $encryption;
             $view_link = "view-employee.php?profile=" . $encryption;
               $count++;

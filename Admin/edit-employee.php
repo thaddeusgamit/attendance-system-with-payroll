@@ -4,7 +4,7 @@ include('../connection.php');
 include('../session.php');
 
 
-if(isset($_GET['profile'])){
+if(isset($_GET['eid'])){
 
         
 
@@ -19,14 +19,14 @@ if(isset($_GET['profile'])){
     $decryption_key = "TeamAgnat";
   
     // Use openssl_decrypt() function to decrypt the data
-    $decrypted_employee =openssl_decrypt ($_GET['profile'], $ciphering,
+    $decrypted_employee =openssl_decrypt ($_GET['eid'], $ciphering,
         $decryption_key, $options, $decryption_iv);
     // foreach ($_GET as $encrypting_lrn => $encrypt_lrn){
     //   $decrypt_lrn = $_GET[$encrypting_lrn] = base64_decode(urldecode($encrypt_lrn));
     //   $decrypted_lrn = ((($decrypt_lrn*987654)/56789)/12345678911);
     // }
       
-      if(empty($_GET['profile'])){    //lrn verification starts here
+      if(empty($_GET['eid'])){    //lrn verification starts here
           echo "<script>alert('Employee not found');
           window.location = 'dashboard.php';</script>";
           exit();
@@ -77,102 +77,42 @@ if(isset($_GET['profile'])){
     <br>
     <label for="">First name</label>
     <br>
-    <input type="text" name="first_name" value= "<?php if(empty($rows['first_name'])){ echo "";}else{ echo $rows['first_name'];}?>" readonly>
+    <input type="text" name="first_name" value= "<?php if(empty($rows['first_name'])){ echo "";}else{ echo $rows['first_name'];}?>" required>
     <br>
     <label for="">Middle name</label>
     <br>
-    <input type="text" name="middle_name" value= "<?php if(empty($rows['middle_name'])){ echo "";}else{ echo $rows['middle_name'];}?>" readonly>
+    <input type="text" name="middle_name" value= "<?php if(empty($rows['middle_name'])){ echo "";}else{ echo $rows['middle_name'];}?>" required>
     <br>
     <label for="">Last name</label>
     <br>
-    <input type="text" name="last_name" value= "<?php if(empty($rows['last_name'])){ echo "";}else{ echo $rows['last_name'];}?>" readonly>
+    <input type="text" name="last_name" value= "<?php if(empty($rows['last_name'])){ echo "";}else{ echo $rows['last_name'];}?>" required>
     <br>
     <label for="">Birthdate</label>
     <br>
-    <input type="date" name="birth_date" value= "<?php if(empty($rows['birth_date'])){ echo "";}else{ echo $rows['birth_date'];}?>" readonly>
+    <input type="date" name="birth_date" value= "<?php if(empty($rows['birth_date'])){ echo "";}else{ echo $rows['birth_date'];}?>" required>
     <br>
     <label for="">Contact No.</label readonly>
     <br>
-    <input type="number" name="cnum" value= "<?php if(empty($rows['contact_number'])){ echo "";}else{ echo $rows['contact_number'];}?>"  readonly>
+    <input type="number" name="cnum" value= "<?php if(empty($rows['contact_number'])){ echo "";}else{ echo $rows['contact_number'];}?>"  required>
     <br>
     <label for="">Email</label>
     <br>
-    <input type="email" name="email" value= "<?php if(empty($rows['email'])){ echo "";}else{ echo $rows['email'];}?>" readonly>
+    <input type="email" name="email" value= "<?php if(empty($rows['email'])){ echo "";}else{ echo $rows['email'];}?>" required>
     <br>
     <label for="">SSS ID number</label>
     <br>
-    <input type="text" name="sss_id" value= "<?php if(empty($rows['sss_id'])){ echo "";}else{ echo $rows['sss_id'];}?>" readonly>
+    <input type="text" name="sss_id" value= "<?php if(empty($rows['sss_id'])){ echo "";}else{ echo $rows['sss_id'];}?>" required>
     <br>
     <label for="">Pag-ibig ID number</label>
     <br>
-    <input type="text" name="pagibig_id" value= "<?php if(empty($rows['pagibig_id'])){ echo "";}else{ echo $rows['pagibig_id'];}?>" readonly>
+    <input type="text" name="pagibig_id" value= "<?php if(empty($rows['pagibig_id'])){ echo "";}else{ echo $rows['pagibig_id'];}?>" required>
     <br>
     <label for="">Philhealth ID number </label>
     <br>
-    <input type="text" name="heatlh_id" value= "<?php if(empty($rows['philhealth_id'])){ echo "";}else{ echo $rows['philhealth_id'];}?>" readonly>
+    <input type="text" name="heatlh_id" value= "<?php if(empty($rows['philhealth_id'])){ echo "";}else{ echo $rows['philhealth_id'];}?>" required>
     <br>
     <label for=""> Wage </label>
     <br>
-    <input type="number" name="wage" value= "<?php if(empty($rows['wage'])){ echo "";}else{ echo $rows['wage'];}?>" readonly>
+    <input type="number" name="wage" value= "<?php if(empty($rows['wage'])){ echo "";}else{ echo $rows['wage'];}?>" required>
     <br>
     </form>
-    
-
-<!-- attendance -->
-
-<h1>ATTENDANCE RECORDS</h1>
-
-
-
-<table>
-  
-  <thead>
-      <tr>
-      <th>No.</th>
-      <th>Date</th>
-      <th>Time in</th>
-      <th>Time Out</th>
-      <th>Day</th>
-      
-      </tr>
-     
-  </thead>
-  <tbody>
-  <?php
-
-      $sql = "SELECT `date`, `time_in`, `time_out`, `day` FROM `attendance` WHERE employee_id = '$decrypted_employee' ORDER BY date DESC";
-      $run = mysqli_query($conn,$sql);
-
-       if(mysqli_num_rows($run) > 0){
-          $count = 0;
-          foreach($run as $row){
-
-            $count++;
- 
-      ?>
-      <tr>
-          <td><?php echo $count;?></td> 
-          <td><?php echo $row['date']?></td>
-          <td><?php echo $row['time_in']?></td>
-          <td><?php echo $row['time_out']?></td>
-          <td><?php echo $row['day']?></td>
-      </tr>
-      <?php
-          }
-      }
-      ?>
-
-  </tbody>
-
-
-  </table>
-
-
-
-
-
-
-
-
-</body>
-</html>
