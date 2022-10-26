@@ -55,17 +55,23 @@ date_default_timezone_set('Asia/Manila');
 $employee_id = $_POST['employee_id'];
 $day = date('l');
 $date = date("M-d-Y");
-$time_in = date("h:i");
-$time_out = date("h:i");
+$time_in = date("H:i",strtotime("now"));;
+$time_out = date("H:i",strtotime("now"));
+
+
+print_r($time_in);
+
+
 
 $dateCreated = date("Y-m-d h:i:a");
 $dateUpdated = date("Y-m-d h:i:a");
 
 // time in
 
+
 if(isset($_POST['time_in'])){
 
- 
+
 
   //validating of employee
 
@@ -121,19 +127,47 @@ if(isset($_POST['time_out'])){
   //validating of employee 
 
   $validate = "SELECT `employee_id` FROM `employees` WHERE employee_id = '$employee_id'";
-  $run_validate = mysqli_query($conn,$validate);
+  $run_validate_query = mysqli_query($conn,$validate);
 
-  if(mysqli_num_rows($run_validate) == 1){
+  if(mysqli_num_rows($run_validate_query) == 1){
 
       // do not double send 
 
-
-
-      $insert_timeout = "UPDATE `attendance` SET `time_out`='$time_out' WHERE employee_id ='$employee_id'";
+      $insert_timeout = "UPDATE `attendance` SET `time_out`='$time_out' WHERE employee_id ='$employee_id' AND date = '$date' ";
       $run_insert_timeout = mysqli_query($conn,$insert_timeout);
   
       if($run_insert_timeout){
-        echo "<script> alert('Succesfully time out')</script>";
+       
+
+
+          $query_hour = "SELECT `time_in`, `lunch_in`, `lunch_out`, `time_out` FROM `attendance` WHERE employee_id = '$employee_id' AND date = '$date' ";
+          $run_query_hour = mysqli_query($conn, $query_hour);
+
+            if(mysqli_num_rows($run_query_hour) > 0){
+              foreach($run_query_hour as $row){
+                $diff_time = round(abs(strtotime($row['time_in']) - strtotime($row['time_out'])) / 3600,2);
+                $diff_lunch = round(abs(strtotime($row['lunch_in']) - strtotime($row['lunch_out'])) / 3600,2);
+                
+                $total_hour = $diff_time - $diff_lunch;
+
+                
+                  
+                
+               $insert_hour = "UPDATE `attendance` SET `hours` = '$total_hour' WHERE employee_id ='$employee_id' AND date = '$date'";
+               $run_hour = mysqli_query($conn, $insert_hour);
+
+               if($run_hour){
+                echo "<script> alert('Succesfully time out')</script>";
+
+               }
+
+
+
+              }
+
+            }
+
+
       }
 
 
