@@ -1,4 +1,7 @@
 <?php
+
+use PhpParser\Node\Stmt\Else_;
+
 include('../connection.php');
 date_default_timezone_set('Asia/Manila');
 ?>
@@ -39,7 +42,10 @@ date_default_timezone_set('Asia/Manila');
             <div class="mb-3">
                 <input class="form-control" class="border border-dark" type="number" name="employee_id" placeholder="Employee ID" style="border-color:black; "></div>
             <div class="mb-3"></div>
-            <div class="mb-3"><button class="btn btn-primary d-block w-100" name = "time_in" type="submit">TIme in&nbsp;</button>
+            <div class="mb-3">
+            <button class="btn btn-primary d-block w-100" name = "time_in" type="submit">Time in&nbsp;</button>
+            <button class="btn btn-primary d-block w-100" name = "lunch_in" type="submit">Lunch In&nbsp;</button>
+            <button class="btn btn-primary d-block w-100" name = "lunch_out" type="submit">Lunch out&nbsp;</button>
             <button class="btn btn-primary d-block w-100" name = "time_out" type="submit">Time out</button></div>
         </form>
     </section>
@@ -52,14 +58,16 @@ date_default_timezone_set('Asia/Manila');
 
 <?php 
 
-$employee_id = $_POST['employee_id'];
+
 $day = date('l');
 $date = date("M-d-Y");
-$time_in = date("H:i",strtotime("now"));;
+$time_in = date("H:i",strtotime("now"));
+$lunch_in = date("H:i",strtotime("now"));
+$lunch_out = date("H:i",strtotime("now"));
 $time_out = date("H:i",strtotime("now"));
 
 
-print_r($time_in);
+
 
 
 
@@ -70,6 +78,10 @@ $dateUpdated = date("Y-m-d h:i:a");
 
 
 if(isset($_POST['time_in'])){
+
+  $employee_id = $_POST['employee_id'];
+
+ 
 
 
 
@@ -118,12 +130,135 @@ if(isset($_POST['time_in'])){
 }
 
 
+// lunch_in
+
+if(isset($_POST['lunch_in'])){
+  $employee_id = $_POST['employee_id'];
+
+  //validate employee 
+
+  $validate_lunch = "SELECT `employee_id` FROM `employees` WHERE employee_id = '$employee_id'";
+  $run_validate_lunch = mysqli_query($conn, $validate_lunch);
+
+  if(mysqli_num_rows($run_validate_lunch) == 1){
+    
+    // function of not double send 
+    $query_lunch = "SELECT `lunch_in` FROM `attendance` WHERE employee_id = '$employee_id' AND date = '$date' AND lunch_in = '$lunch_in'";
+    $run_query_lunch = mysqli_query($conn, $query_lunch);
+
+    if(mysqli_num_rows($run_query_lunch) > 0 ){
+
+      echo "<script> alert('Already lunch in')</script>";
+    }
+
+    else{
+      // updating lunch
+
+      $insert_lunchin = "UPDATE `attendance` SET `lunch_in` = '$lunch_in' WHERE employee_id ='$employee_id' AND date = '$date'";;
+      $run_insert_lunch = mysqli_query($conn, $insert_lunchin);
+
+
+      if($run_insert_lunch){
+        echo "<script> alert('lunch in')</script>";
+
+
+      }
+
+
+      else{
+        echo "<script> alert('Time in first')</script>";
+
+      }
+
+    }
+ 
+ 
+ 
+  }
+
+  else
+  {
+    echo "<script> alert('Not Registered')</script>";
+  }
+
+
+
+  
+}
+
+
+
+
+// lunch out
+
+
+
+if(isset($_POST['lunch_out'])){
+  $employee_id = $_POST['employee_id'];
+
+  //validate employee 
+
+  $validate_lunchout = "SELECT `employee_id` FROM `employees` WHERE employee_id = '$employee_id'";
+  $run_validate_lunchout = mysqli_query($conn, $validate_lunchout);
+
+  if(mysqli_num_rows($run_validate_lunchout) == 1){
+    
+    // function of not double send 
+    $query_lunch_out = "SELECT `lunch_in` FROM `attendance` WHERE employee_id = '$employee_id' AND date = '$date' AND lunch_in = '$lunch_in'";
+    $run_query_lunch_out = mysqli_query($conn, $query_lunch_out);
+
+    if(mysqli_num_rows($run_query_lunch_out) == 1 ){
+
+      echo "<script> alert('Already lunch out')</script>";
+    }
+
+    else{
+      // updating lunch
+
+      $insert_lunch_out = "UPDATE `attendance` SET `lunch_out` = '$lunch_in' WHERE employee_id ='$employee_id' AND date = '$date'";;
+      $run_insert_lunch_out = mysqli_query($conn, $insert_lunch_out);
+
+
+      if($run_insert_lunch_out){
+        echo "<script> alert('lunch out')</script>";
+
+
+      }
+
+
+      else{
+        echo "<script> alert('Lunch in first ')</script>";
+
+      }
+
+    }
+ 
+ 
+ 
+  }
+
+  else
+  {
+    echo "<script> alert('Not Registered')</script>";
+  }
+
+
+
+  
+}
+
+
+
 
 
 // time out 
 
 if(isset($_POST['time_out'])){
+  $employee_id = $_POST['employee_id'];
   
+ 
+
+
   //validating of employee 
 
   $validate = "SELECT `employee_id` FROM `employees` WHERE employee_id = '$employee_id'";
@@ -148,7 +283,9 @@ if(isset($_POST['time_out'])){
                 $diff_time = round(abs(strtotime($row['time_in']) - strtotime($row['time_out'])) / 3600,2);
                 $diff_lunch = round(abs(strtotime($row['lunch_in']) - strtotime($row['lunch_out'])) / 3600,2);
                 
-                $total_hour = $diff_time - $diff_lunch;
+                  print_r($diff_lunch);
+
+                  $total_hour = $diff_time - $diff_lunch;
 
                 
                   

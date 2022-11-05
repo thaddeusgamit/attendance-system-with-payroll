@@ -5,18 +5,101 @@ date_default_timezone_set('Asia/Manila');
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/bootstrap.css">
+     <link rel="stylesheet" href="../src/css/bootstrap.min.css">
+     <link rel="stylesheet" href="../src/css/login.css">
     <title>Welcome</title>
 </head>
 <body>
 
-    <form action="" method="POST" enctype="multipart/form-data">
+<nav class="nav">
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+  </li>
+</ul>
+</nav>
+
+<div class="form-container container-lg mt-0 d-flex flex-column justify-content-center align-items-center text-center">
+    <form action="" method="POST" class="login-form" enctype="multipart/form-data" >
+        <span class="form-header">
+            <h1 class="header-text bg-dark display-6">Register</h5>
+        </span>
+        <div class="row g-4">
+  <div class="col-sm-4">
+  <label>Picture</label>
+    <input type="file" class="form-control" id="formFile"  name="employee_picture" required>
+  </div>
+  <div class="col-sm-4">
+    <label>First Name </label>
+    <input type="text" class="form-control"  id="validationCustom01" placeholder="First Name" name="first_name" required >
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-sm-4">
+  <label>Middle Name</label>
+    <input type="text" class="form-control" placeholder="Middle Name" name="middle_name" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Last name</label>
+    <input type="text" class="form-control" placeholder="Last name" name="last_name" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Birthdate</label>
+    <input type="date" class="form-control" name="birth_date" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Contact Number</label>
+    <input type="Number" class="form-control" placeholder="Contact Number" name="cnum" maxlength="10" required>
+  </div>
+  <div class="col-sm-4">
+  <label>Email</label>
+    <input type="email" class="form-control" placeholder="Email"  name="email"  maxlength="10" required>
+  </div>
+  <div class="col-sm-4">
+  <label>SSS ID</label>
+    <input type="text" class="form-control" placeholder="SSS ID" name="sss_id" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Pagibig</label>
+    <input type="text" class="form-control" placeholder="Pagibig" name="pagibig_id" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Philhealth</label>
+    <input type="text" class="form-control" placeholder="Philhealth" name="heatlh_id" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Per hour</label>
+    <input type="number" class="form-control" placeholder="Wage" name="wage" required maxlength="5" >
+  </div>
+
+  <div class="col-sm-4">
+    <div class="d-grid gap-2 col-8 mx-auto">
+        <input type="submit" class="btn btn-outline-dark" name = "register" value="Register"></button>
+    </div>
+  </div>
+ 
+  
+</div>
+    </form>
+
+    <!-- <form action="" method="POST" enctype="multipart/form-data">
     <label for="">Insert a Photo</label>
     <br>
     <input type="file" name="employee_picture">
@@ -62,7 +145,7 @@ date_default_timezone_set('Asia/Manila');
     <input type="number" name="wage">
     <br>
     <input type="submit" name = "register" value="Register">
-    </form>
+    </form> -->
     
 </body>
 </html>

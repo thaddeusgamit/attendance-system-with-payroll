@@ -10,16 +10,37 @@ include('../session.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     <link rel="stylesheet" href="../src/css/bootstrap.css">
+     <link rel="stylesheet" href="../src/css/bootstrap.min.css">
+     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+      <link rel="stylesheet" href="assets/css/Fixed-navbar-starting-with-transparency-1.css">
+      <link rel="stylesheet" href="assets/css/Fixed-navbar-starting-with-transparency.css">
+      <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+      <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+      <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+      <link rel="stylesheet" href="assets/css/styles.css">
+      <link rel="stylesheet" href="src/css/table.data.css">
     <title>Welcome</title>
 </head>
+
 <body>
-    <a href ="register.php">Register</a>
-    <a href ="logout.php">Logout</a>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.php">
+      <img src="../src/pictures/navbar.png" alt="" width="150" height="45" class="d-inline-block align-text-left">
 
+    </a>
 
+    
+  </div>
+</nav>
 
-    <table>
+    
+
+    <div class="container mt-5">
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle mb-0 ">
   
   <thead>
       <tr>
@@ -76,7 +97,7 @@ include('../session.php');
           <td>
            
          
-          <a href="<?php echo $edit_link ?>">edit</a>
+          <a href="<?php echo $edit_link ?>"> Edit<i style="color:#56BBF1; font-size:25px;" class="fa-solid fa-pen-to-square"></i></a>
           <a href="<?php echo $delete_link ?>">Delete</a>
           </td>
       </tr>
@@ -89,6 +110,9 @@ include('../session.php');
 
 
   </table>
+  </div>
+    </div>
+  <script src ="../src/js/jquery-3.6.1.min.js"></script>
 
   <script src="../src/js/table.click.js"></script>
 

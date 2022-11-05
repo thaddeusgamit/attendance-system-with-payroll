@@ -60,6 +60,9 @@ if(isset($_GET['eid'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/bootstrap.css">
+     <link rel="stylesheet" href="../src/css/bootstrap.min.css">
+     <link rel="stylesheet" href="../src/css/login.css">
     <title>Welcome</title>
 </head>
 <body>
@@ -76,50 +79,69 @@ if(isset($_GET['eid'])){
 
     ?>
 
-    <form action="" method="POST" enctype="multipart/form-data">
-    <img src="<?php echo "employee_pictures/" . $rows['picture']?>" alt="user image" height="100px" width="100px">
-    <br>
-    <label for="">First name</label>
-    <br>
-    <input type="text" name="first_name" value = "<?php if(empty($rows['first_name'])){ echo "";}else{ echo $rows['first_name'];}?>" required>
-    <br>
-    <label for="">Middle name</label>
-    <br>
-    <input type="text" name="middle_name" value = "<?php if(empty($rows['middle_name'])){ echo "";}else{ echo $rows['middle_name'];}?>" >
-    <br>
-    <label for="">Last name</label>
-    <br>
-    <input type="text" name="last_name" value = "<?php if(empty($rows['last_name'])){ echo "";}else{ echo $rows['last_name'];}?>" >
-    <br>
-    <label for="">Birthdate</label>
-    <br>
-    <input type="date" name="birth_date" value= "<?php if(empty($rows['birth_date'])){ echo "";}else{ echo $rows['birth_date'];}?>" required>
-    <br>
-    <label for="">Contact No.</label readonly>
-    <br>
-    <input type="number" name="cnum" value = "<?php if(empty($rows['contact_number'])){ echo "";}else{ echo $rows['contact_number'];}?>"  required>
-    <br>
-    <label for="">Email</label>
-    <br>
-    <input type="email" name="email" value = "<?php if(empty($rows['email'])){ echo "";}else{ echo $rows['email'];}?>" required>
-    <br>
-    <label for="">SSS ID number</label>
-    <br>
-    <input type="text" name="sss_id" value = "<?php if(empty($rows['sss_id'])){ echo "";}else{ echo $rows['sss_id'];}?>" required>
-    <br>
-    <label for="">Pag-ibig ID number</label>
-    <br>
-    <input type="text" name="pagibig_id" value = "<?php if(empty($rows['pagibig_id'])){ echo "";}else{ echo $rows['pagibig_id'];}?>" required>
-    <br>
-    <label for="">Philhealth ID number </label>
-    <br>
-    <input type="text" name="heatlh_id" value = "<?php if(empty($rows['philhealth_id'])){ echo "";}else{ echo $rows['philhealth_id'];}?>" required>
-    <br>
-    <label for=""> Wage </label>
-    <br>
-    <input type="number" name="wage" value = "<?php if(empty($rows['wage'])){ echo "";}else{ echo $rows['wage'];}?>" required>
-    <br>
-    <input type="submit" name="edit" value = "Save changes">
+<div class="form-container container-lg mt-0 d-flex flex-column justify-content-center align-items-center text-center">
+    <form action="" method="POST" class="login-form" enctype="multipart/form-data" >
+        <span class="form-header">
+            <h1 class="header-text bg-dark display-6">Employee Data</h5>
+        </span>
+        <div class="row g-4">
+  <div class="col-sm-4">
+  
+  <img src="<?php echo "employee_pictures/" . $rows['picture']?>" alt="user image" height="100px" width="120px">
+  </div>
+  <div class="col-sm-4">
+    <label>First Name </label>
+    <input type="text" class="form-control"  placeholder="First Name" name="first_name" value="<?php if(empty($rows['first_name'])){ echo "";}else{ echo $rows['first_name'];}?> " required >
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-sm-4">
+  <label>Middle Name</label>
+    <input type="text" class="form-control" placeholder="Middle Name" name="middle_name" value= "<?php if(empty($rows['middle_name'])){ echo "";}else{ echo $rows['middle_name'];}?>" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Last name</label>
+    <input type="text" class="form-control" placeholder="Last name" name="last_name" value= "<?php if(empty($rows['last_name'])){ echo "";}else{ echo $rows['last_name'];}?>" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Birthdate</label>
+    <input type="date" class="form-control" name="birth_date"  value= "<?php if(empty($rows['birth_date'])){ echo "";}else{ echo $rows['birth_date'];}?>" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Contact Number</label>
+    <input type="Number" class="form-control" placeholder="Contact Number" name="cnum" maxlength="12" value= "<?php if(empty($rows['contact_number'])){ echo "";}else{ echo $rows['contact_number'];}?>"  required>
+  </div>
+  <div class="col-sm-4">
+  <label>Email</label>
+    <input type="email" class="form-control" placeholder="Email"  name="email" value= "<?php if(empty($rows['email'])){ echo "";}else{ echo $rows['email'];}?>"  required>
+  </div>
+  <div class="col-sm-4">
+  <label>SSS ID</label>
+    <input type="text" class="form-control" placeholder="SSS ID" name="sss_id" value= "<?php if(empty($rows['sss_id'])){ echo "";}else{ echo $rows['sss_id'];}?>" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Pagibig</label>
+    <input type="text" class="form-control" placeholder="Pagibig" name="pagibig_id" value= "<?php if(empty($rows['pagibig_id'])){ echo "";}else{ echo $rows['pagibig_id'];}?>" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Philhealth</label>
+    <input type="text" class="form-control" placeholder="Philhealth" name="heatlh_id" value= "<?php if(empty($rows['philhealth_id'])){ echo "";}else{ echo $rows['philhealth_id'];}?>" required >
+  </div>
+  <div class="col-sm-4">
+  <label>Per hour</label>
+    <input type="number" class="form-control" placeholder="Wage" name="wage" value= "<?php if(empty($rows['wage'])){ echo "";}else{ echo $rows['wage'];}?>" maxlength="5" required >
+  </div>
+
+  <div class="col-sm-4">
+    <div class="d-grid gap-3 col-8 mx-auto">
+        <input type="submit" class="btn btn-outline-dark" name = "edit" value="Save changes"></button>
+    </div>
+  </div>
+
+
+</div>
+<br>
     </form>
 
 </body>
