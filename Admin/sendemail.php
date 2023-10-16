@@ -4,25 +4,6 @@ include ('../connection.php');
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="" method="POST" enctype="multipart/form-data" >
-        <label>Email</label>
-        <input type="file" name="file" accept= "application/pdf"> 
-        <input type="email" name = "email" required> 
-        <input type="submit" name="send" value="Send">
-    </form>
-    
-</body>
-</html>
-
 <?php
 
 
@@ -44,13 +25,13 @@ function sendMail($email,$path){
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'thaddeusgamit31@gmail.com';    //don't forget the email                 //SMTP username // email username
-        $mail->Password   = 'hmpsnnhddfroharu';     // passowrd                          //SMTP // email password password
+        $mail->Password   = 'ptxwqzrbcyddokuv';     // passowrd                          //SMTP // email password password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
         $mail->SetFrom('thaddeusgamit31@gmail.com');
-        $mail->addAddress('thaddeusgamit31@gmail.com');
+        $mail->addAddress($email);
         $mail->addAttachment($path);     //Add a recipient
     
         //Content
@@ -88,10 +69,12 @@ if(isset($_POST['send'])){
         if(move_uploaded_file($_FILES['file']['tmp_name'],$path)){
         
             sendMail($email,$path);
-            echo "<script>alert('Sucess')</script>";
+            echo "<script>alert('succesfully Send');
+            window.location = 'dashboard.php'</script>";
     
         }else{
-            echo "<script>alert('Please upload the pdf')</script>";
+            echo "<script>alert('Upload PDF');
+            window.location = 'dashboard.php'</script>";
            
         } 
 
@@ -99,7 +82,8 @@ if(isset($_POST['send'])){
     }
 
     else {
-        echo " <script> alert('Email not Registered')</script>";
+        echo "<script>alert('Email not register');
+            window.location = 'dashboard.php'</script>";
     }
 
 

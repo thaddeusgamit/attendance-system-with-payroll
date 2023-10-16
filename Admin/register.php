@@ -18,22 +18,10 @@ date_default_timezone_set('Asia/Manila');
 </head>
 <body>
 
-<nav class="nav">
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">Disabled</a>
-  </li>
-</ul>
-</nav>
+<?php 
+include ('navbar.php');
+?>
+
 
 <div class="form-container container-lg mt-0 d-flex flex-column justify-content-center align-items-center text-center">
     <form action="" method="POST" class="login-form" enctype="multipart/form-data" >

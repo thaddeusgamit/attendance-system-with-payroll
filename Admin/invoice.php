@@ -6,9 +6,50 @@ include('../connection.php');
 include('../session.php');
 date_default_timezone_set('Asia/Manila');
 
-$decrypted_employee = 20228035;
+
+if(isset($_GET['eid'])){
+
+    
+
+    // Store the cipher method
+    $ciphering = "AES-128-CTR";
+    $options = 0;
+    // Non-NULL Initialization Vector for decryption
+    $decryption_iv = '1234567891011121';
+  
+    // Store the decryption key
+    $decryption_key = "TeamAgnat";
+  
+    // Use openssl_decrypt() function to decrypt the data
+    $decrypted_employee =openssl_decrypt ($_GET['eid'], $ciphering,
+        $decryption_key, $options, $decryption_iv);
+    // foreach ($_GET as $encrypting_lrn => $encrypt_lrn){
+    //   $decrypt_lrn = $_GET[$encrypting_lrn] = base64_decode(urldecode($encrypt_lrn));
+    //   $decrypted_lrn = ((($decrypt_lrn*987654)/56789)/12345678911);
+    // }
+      
+      if(empty($_GET['eid'])){    //lrn verification starts here
+          echo "<script>alert('Employee not found');
+          window.location = 'dashboard.php';</script>";
+          exit();
+      }
 
 
+    
+
+      $verify_lrn = "SELECT employees.employee_id FROM `employees` WHERE employee_id = '$decrypted_employee'";
+      $query_request = mysqli_query($conn, $verify_lrn) or die (mysqli_error($conn));
+      if(mysqli_num_rows($query_request) == 0){
+              echo "
+              <script type = 'text/javascript'>
+              window.location = 'dashboard.php';
+              </script>";
+              exit();
+      }
+
+
+    }
+  
 
 
 
@@ -303,27 +344,32 @@ $run_rd = mysqli_query($conn, $query_rd);
 
 
 
-        //date 
+        // date 
 
-        // $day = date('d');
+        $day = date('d');
 
-        // if($day == 15){
+        if($day == 15){
 
-        //  $deductions =  $absent + $sss + $health + $tax_inc;  
-        //  $earnings =  $overtime_rd + $restday_pay + $per_cut + $total_overtime;
-        //  $net_pay = $earnings - $deductions;
+         $deductions =  $absent + $sss + $health + $tax_inc;  
+         $earnings =  $overtime_rd + $restday_pay + $per_cut + $total_overtime;
+         $net_pay = $earnings - $deductions;
 
-        // }
+        }
 
 
-        // elseif($day == 30 || $day == 31){
+        elseif($day == 30 || $day == 31){
             
-         //  $deductions =  $absent + $pagibig + $tax_inc;  
-        //  $earnings =  $overtime_rd + $restday_pay + $per_cut + $total_overtime;
-        //  $net_pay = $earnings - $deductions;
+          $deductions =  $absent + $pagibig + $tax_inc;  
+         $earnings =  $overtime_rd + $restday_pay + $per_cut + $total_overtime;
+         $net_pay = $earnings - $deductions;
 
 
-        // }
+        }
+
+        else
+        {
+            $html.='NO payslip';
+        }
         
     
 
@@ -405,21 +451,10 @@ $dompdf = new Dompdf();
 // (Optional) Setup the paper size and orientation
 $dompdf->setPaper('Legal', 'portrait');
 
-
-
-$dompdf->get_canvas()->get_cpdf()->setEncryption(NULL, "password", array('print'));
-$dompdf->get_canvas()->get_cpdf()->encrypted=true;
-
-
-
 $dompdf->loadHtml($html);
-
-
 
 // Render the HTML as PDF
 $dompdf->render();
-
-
 
 $dompdf->stream("Seasonal INC paycheck", Array("Attachment" =>0));
 

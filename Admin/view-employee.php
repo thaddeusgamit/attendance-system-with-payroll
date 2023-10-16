@@ -64,6 +64,9 @@ if(isset($_GET['profile'])){
 </head>
 <body>
 
+<?php 
+include ('navbar.php');
+?>
 
     <!-- query of employee -->
 

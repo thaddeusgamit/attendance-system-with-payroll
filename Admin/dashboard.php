@@ -25,24 +25,17 @@ include('../session.php');
 </head>
 
 <body>
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">
-      <img src="../src/pictures/navbar.png" alt="" width="150" height="45" class="d-inline-block align-text-left">
-
-    </a>
-
-    
-  </div>
-</nav>
+<?php 
+include ('navbar.php');
+?>
 
     
 
     <div class="container mt-5">
   <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle mb-0 ">
+    <table class="table table-light table-hover align-middle mb-0 ">
   
-  <thead>
+  <thead class ="table table-dark">
       <tr>
       <th>No.</th>
       <th>Picture</th>
@@ -81,6 +74,7 @@ include('../session.php');
           //   $encrypted_data = (($lrn*12345678911*56789)/987654);
             $edit_link = "edit-employee.php?eid=" . $encryption;
             $delete_link = "delete-employee.php?eid=" . $encryption;
+            $invoice_link = "invoice.php?eid=" . $encryption;
             $view_link = "view-employee.php?profile=" . $encryption;
               $count++;
 
@@ -99,6 +93,7 @@ include('../session.php');
          
           <a href="<?php echo $edit_link ?>"> Edit<i style="color:#56BBF1; font-size:25px;" class="fa-solid fa-pen-to-square"></i></a>
           <a href="<?php echo $delete_link ?>">Delete</a>
+          <a href="<?php echo $invoice_link ?>">invoice</a>
           </td>
       </tr>
       <?php

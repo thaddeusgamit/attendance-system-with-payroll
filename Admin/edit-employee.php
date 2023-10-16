@@ -67,6 +67,10 @@ if(isset($_GET['eid'])){
 </head>
 <body>
 
+<?php 
+include ('navbar.php');
+?>
+
 
     <!-- query of employee -->
 
