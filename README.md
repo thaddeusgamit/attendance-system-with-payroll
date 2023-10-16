@@ -13,9 +13,6 @@ php as back end and html,css,js,bootstrap as front end.
 - sending of payroll via email using php.
 - realtime update of a payrol.
 
-<H1> About this project </H1>
-
-
 
 - :mailbox:How to reach me: [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/thaddeus-gamit/)
 
