@@ -12,7 +12,7 @@ php as back end and html,css,js,bootstrap as front end.
 - Automatic computation of payroll.
 - sending of payroll via email using php.
 - realtime update of a payrol.
-=======
+
 <H1> About this project </H1>
 
 
